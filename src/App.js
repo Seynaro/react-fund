@@ -1,28 +1,34 @@
-import './App.css';
-import {useState} from "react";
+import './styles/App.css';
+import {useRef, useState} from "react";
+import Counter from "./components/Counter";
+import ClassCounter from "./components/ClassCounter";
+import './styles/App.css'
+import PostItem from "./components/PostItem";
+import PostList from "./components/PostList";
+import MyButton from "./components/UI/button/MyButton";
+import MyInput from "./components/UI/input/MyInput";
+import PostForm from "./components/PostForm";
 
 function App() {
 
-    let [likes, setLikes] = useState(0)
-    let [value, setValue] = useState('Text in input')
+    const [posts, setPosts] = useState([
+        {id: 1, title: 'JavaScript', body: 'Description'},
+        {id: 2, title: 'JavaScript 2', body: 'Description'},
+        {id: 3, title: 'JavaScript 3', body: 'Description'},
+    ])
 
-    function increment () {
-        setLikes(likes + 1)
+    const addNewPost = (e) => {
+        e.preventDefault()
+        setPosts([...posts, {...post, id: posts.length + 1}])
+        setPost({title: '', body: '',})
     }
 
-    function decrement () {
-        setLikes(likes - 1)
-    }
-
-  return (
-    <div className="App">
-      <h1>{likes}</h1>
-      <h1>{value}</h1>
-        <input type="text" value={value} onChange={event => setValue(event.target.value)}/>
-        <button onClick={increment}>Increment</button>
-        <button onClick={decrement}>Decrement</button>
-    </div>
-  );
+    return (
+        <div className="App">
+            <PostForm/>
+            <PostList posts={posts} title='Список постов 1'/>
+        </div>
+    );
 }
 
 export default App;
