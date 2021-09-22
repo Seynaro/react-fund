@@ -3,6 +3,7 @@ import {useState} from "react";
 import './styles/App.css'
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/MySelect";
 
 function App() {
 
@@ -22,9 +23,18 @@ function App() {
 
     return (
         <div className="App">
-            <PostForm remove={removePost}/>
+            <PostForm create={createPost}/>
+            <hr style={{margin: '15px 0'}}/>
+            <div>
+                <MySelect
+                    defaultValue="Сортирвока"
+                options={[
+                    {value: 'title', name: 'По названию'},
+                    {value: 'body', name: 'По описанию'}
+                ]}/>
+            </div>
             {posts.length !== 0
-                ? <PostList create={createPost} posts={posts} title='Список постов'/>
+                ? <PostList remove={removePost} posts={posts} title='Список постов'/>
                 : <h1 style={{textAlign: 'center'}}>Посты не найдены!</h1>
             }
         </div>
